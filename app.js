@@ -4,6 +4,8 @@ const app = express();
 const path = require('path')
 const { addPage, editPage, main, userList, userPages, wikipage, layout } = require('./views/index.js');
 
+const { db } = require('./models');
+
 
 app.use(express.urlencoded({extended: false}));
 
@@ -15,6 +17,10 @@ app.get('/', (req, res) => {
 });
 
 
+db.authenticate()
+  .then(() => {
+    console.log('connected to the database');
+  })
 
 
 const port = 3000;
